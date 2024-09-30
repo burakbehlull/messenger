@@ -1,9 +1,12 @@
+import { BrowserRouter } from "react-router-dom"
+import Routes from "./routers/routes"
+
 function App() {
 
   return (
-    <>
-		MERHABA MESSENGER APP!
-    </>
+    <BrowserRouter>
+        <Routes />
+    </BrowserRouter>
   )
 }
 
