@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 
 require('dotenv').config()
+require('./config/db').db()
 
 const { dmRoute, messageRoute, authRoute } = require('./routers')
 
