@@ -1,0 +1,30 @@
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+
+const DMSchema = new Schema({
+	type: {
+		type: String,
+		enum: ["directMessage","groupMessage"],
+		required: true,
+	}
+    name: {
+        type: String
+    },
+    users: [{ 
+        type: Schema.Types.ObjectId, 
+        ref: 'Member', 
+        required: true 
+    }],
+    invisible: { 
+        type: Array,
+    },
+    numberId: {
+        type: String
+    },
+    timestamp: { 
+        type: Date, 
+        default: Date.now 
+    }
+})
+
+module.exports = mongoose.model('DM', DMSchema)
