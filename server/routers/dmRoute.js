@@ -3,6 +3,6 @@ const router = express.Router()
 
 const { userDmCreate } = require('../controllers/dmController')
 
-router.route('/').post(userDmCreate)
+router.route('/create').post(userDmCreate)
 
 module.exports = router
