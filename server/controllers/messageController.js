@@ -21,6 +21,11 @@ async function messageCreate(req, res){
         })
     } catch (error) {
         console.log('Hata: ', error.message)
+        return await res.json({
+            success: false,
+            message: 'Başarısız',
+            error: error.message
+        })
     }
 }
 
