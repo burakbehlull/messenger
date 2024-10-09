@@ -4,15 +4,15 @@ const { generateRandomNumber } = require('../helpers/misc')
 async function register(req,res){
     const { displayName, username, email, password } = req.body
     const user = await Member.findOne({$or: [{email: email}, {username: username}]})
-	const generatedId = generateRandomNumber()
+	const generatedId = await generateRandomNumber()
 	
     if(!user){
-		await User.create({
+		await Member.create({
             displayName: displayName,
             username: username,
             email: email,
             password: password,
-			userId: generatedId
+			id: generatedId
         })
         return await res.json({
             message: 'Kullanıcı başarıyla oluşturuldu.'

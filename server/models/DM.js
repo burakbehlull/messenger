@@ -6,9 +6,10 @@ const DMSchema = new Schema({
 		type: String,
 		enum: ["directMessage","groupMessage"],
 		required: true,
-	}
+	},
     name: {
-        type: String
+        type: String,
+        required: true,
     },
     users: [{ 
         type: Schema.Types.ObjectId, 
@@ -18,7 +19,7 @@ const DMSchema = new Schema({
     invisible: { 
         type: Array,
     },
-    numberId: {
+    id: {
         type: String
     },
     timestamp: { 

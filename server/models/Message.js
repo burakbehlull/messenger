@@ -14,7 +14,7 @@ const MessageSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'DM'
     },
-    messageId: {
+    id: {
         type: String
     },
     content: {

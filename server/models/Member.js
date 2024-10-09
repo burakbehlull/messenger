@@ -13,6 +13,10 @@ const MemberSchema = new Schema({
         unique: true,
         required: true
     },
+    id: {
+        type: String,
+        required: true,
+    },
     email: {
         type: String,
         trim: true,

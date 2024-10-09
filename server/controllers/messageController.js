@@ -4,14 +4,14 @@ const { generateRandomNumber } = require('../helpers/misc')
 async function messageCreate(req, res){
     try {
         const { buyerUserId, senderUserId, content, dmId } = req.body
-        const generatedId = generateRandomNumber()
+        const generatedId = await generateRandomNumber()
         if(!buyerUserId || !senderUserId || !dmId) return
         const message = await Message.create({
             buyerUserId: buyerUserId,
             senderUserId: senderUserId,
             dmId: dmId,
             content: content,
-            messageId: generatedId
+            id: generatedId
             
         }) 
         return await res.json({
