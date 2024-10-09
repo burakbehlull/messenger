@@ -1,9 +1,8 @@
-import jwt from 'jsonwebtoken'
-import dotenv from 'dotenv'
-import Member from '../models/Member'
-dotenv.config()
+const jwt = require('jsonwebtoken')
+const Member = require('../models/Member')
+require('dotenv/config')
 const JWT_KEY = process.env.JWT_KEY
-
+console.log(JWT_KEY)
 function generateRefreshToken(data){
     return jwt.sign(data, JWT_KEY, {expiresIn: '10h'})
 }
