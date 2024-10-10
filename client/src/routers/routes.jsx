@@ -1,5 +1,6 @@
 import { useRoutes } from 'react-router-dom'
-import { Home } from '../pages/index'
+import { Home } from '@pages'
+
 const Routes = ()=> {
     const data = useRoutes([
         {

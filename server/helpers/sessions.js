@@ -1,8 +1,9 @@
 const jwt = require('jsonwebtoken')
 const Member = require('../models/Member')
 require('dotenv/config')
+
 const JWT_KEY = process.env.JWT_KEY
-console.log(JWT_KEY)
+
 function generateRefreshToken(data){
     return jwt.sign(data, JWT_KEY, {expiresIn: '10h'})
 }
@@ -27,14 +28,11 @@ function isExpired(token){
         console.log(isVerify)
         return {expired: false}
     } catch (err) {
-        console.log('is err')
         if (err.name === 'TokenExpiredError') {
-            console.log('Expired')
             return {expired: true}
         } else if (err.name === 'JsonWebTokenError' && err.message === 'invalid signature'){
             return {expired: false}
         }
-        console.log('null')
         return null
     }
 }
@@ -59,6 +57,7 @@ function verifyAccessToken(user){
 
     } catch (err) {
         console.log(err)
+        return err
     }
 }
 

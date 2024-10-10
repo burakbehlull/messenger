@@ -1,7 +1,8 @@
 function Home(){
     return (
         <>
-            HOME
+            Welcome to Messenger!
+
         </>
     )
 }

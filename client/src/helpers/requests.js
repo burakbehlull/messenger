@@ -20,7 +20,7 @@ async function dmCreate({users}){
 }
 
 async function register({displayName, username, email, password }) {
-    const response = await axios.post(api+"/user/create", { displayName, username, email, password }).then((res)=> {
+    const response = await axios.post(api+"/auth/create", { displayName, username, email, password }).then((res)=> {
         return {data: res.data}
     }).catch((err)=> {
         return {error: err}
@@ -29,7 +29,7 @@ async function register({displayName, username, email, password }) {
 }
 
 async function login({ email, password }) {
-    const response = await axios.post(api+"/user/find", { email, password }).then((res)=> {
+    const response = await axios.post(api+"/auth/find", { email, password }).then((res)=> {
         return {data: res.data}
     }).catch((err)=> {
         return {error: err}
