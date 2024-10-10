@@ -19,7 +19,7 @@ async function dmCreate({ users }){
     return response
 }
 
-async function getDmMessages({ dmId }){
+async function getDmMessages(dmId){
     const response = await axios.post(api+`/dm/messages/${dmId}`).then((res)=> {
         return {data: res.data}
     }).catch((err)=> {

@@ -1,5 +1,6 @@
 const express = require('express')
 const cors = require('cors')
+const morgan = require('morgan')
 
 require('dotenv').config()
 require('./config/db').db()
@@ -17,6 +18,8 @@ app.use(cors({
 	origin: true,
 	credentials: true
 }))
+
+app.use(morgan('dev'))
 
 app.get('/', (req,res)=> {
     res.send('Hello Messenger!')
