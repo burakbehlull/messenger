@@ -82,7 +82,7 @@ async function userVerify(req,res){
             })
         }
         console.log(verify)
-        const user = await Member.findOne({email: verify?.user?.email})
+        const user = await Member.findOne({email: verify?.user?.email}).select('-password')
         console.log(user)
         return res.json({
             success: true,

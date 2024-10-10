@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { register } from '@requests'
+import { useNavigate } from "react-router-dom"
 
 function Register(){
     const [values, setValues] = useState({
@@ -10,13 +11,17 @@ function Register(){
     })
     const [error, setError] = useState({})
     const [data, setData] = useState({})
+    const navigate = useNavigate()
 
     function handleChange(e){
         setValues({...values, [e.target.name]: e.target.value})
     }
     async function handleSubmit(){
         const submit = await register(values)
-        if(submit.data) setData(submit.data)
+        if(submit.data) {
+            setData(submit.data)
+            navigate('/login')
+        }
         if(submit.error) setError(submit.error)
     }
     return (

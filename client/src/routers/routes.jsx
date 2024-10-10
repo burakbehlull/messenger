@@ -1,5 +1,5 @@
 import { useRoutes } from 'react-router-dom'
-import { Home, Register } from '@pages'
+import { Home, Register, Login } from '@pages'
 
 const Routes = ()=> {
     const data = useRoutes([
@@ -10,6 +10,10 @@ const Routes = ()=> {
         {
             path: '/register',
             element: <Register />
+        }, 
+        {
+            path: '/login',
+            element: <Login />
         }
     ])
     return data

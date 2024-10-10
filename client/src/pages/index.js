@@ -11,6 +11,10 @@ import IsLogin from "./auth/IsLogin"
 import Login from "./auth/Login"
 import Register from "./auth/Register"
 
+// partials
+import Nav from "./partials/Nav"
+import Footer from "./partials/Footer"
+
 
 export {
     // pages
@@ -22,6 +26,10 @@ export {
     // auth
     IsLogin,
     Login,
-    Register
+    Register,
+
+    // partials
+    Nav,
+    Footer
 
 }

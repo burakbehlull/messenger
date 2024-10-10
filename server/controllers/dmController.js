@@ -14,7 +14,7 @@ async function userDmCreate(req, res) {
             })
         }
 
-        const members = await Member.find({ _id: { $in: users } })
+        const members = await Member.find({ _id: { $in: users } }).select('-password')
         if (members.length !== users.length) {
             return res.status(400).json({
                 success: false,

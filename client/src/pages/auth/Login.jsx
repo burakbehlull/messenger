@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { login } from '@requests'
+import { setSession, removeSession } from '@helpers'
+import { useNavigate } from 'react-router-dom'
 
 function Login(){
     const [values, setValues] = useState({
@@ -8,13 +10,18 @@ function Login(){
     })
     const [error, setError] = useState({})
     const [data, setData] = useState({})
-
+    const navigate = useNavigate()
     function handleChange(e){
         setValues({...values, [e.target.name]: e.target.value})
     }
     async function handleSubmit(){
         const submit = await login(values)
-        if(submit.data) setData(submit.data)
+        if(submit.data) {
+            setData(submit.data)
+            removeSession()
+            setSession(submit.data['accessToken'])
+            navigate('/')
+        }
         if(submit.error) setError(submit.error)
     }
     return (
