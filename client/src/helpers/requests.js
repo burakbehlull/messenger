@@ -19,6 +19,15 @@ async function dmCreate({ users }){
     return response
 }
 
+async function getDmMessages({ dmId }){
+    const response = await axios.post(api+`/dm/messages/${dmId}`).then((res)=> {
+        return {data: res.data}
+    }).catch((err)=> {
+        return {error: err}
+    })
+    return response
+}
+
 async function register({ displayName, username, email, password }) {
     const response = await axios.post(api+"/auth/create", { displayName, username, email, password }).then((res)=> {
         return {data: res.data}
@@ -40,6 +49,7 @@ async function login({ email, password }) {
 export {
     messageCreate,
     dmCreate,
+    getDmMessages,
 
     // auth
     register,

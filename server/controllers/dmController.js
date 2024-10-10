@@ -1,5 +1,6 @@
 const DM = require('../models/DM')
 const Member = require('../models/Member')
+const Message = require('../models/Message')
 const { generateRandomNumber } = require('../helpers/misc')
 
 async function userDmCreate(req, res) {
@@ -55,6 +56,34 @@ async function userDmCreate(req, res) {
     }
 }
 
+async function getDmMessages(req, res) {
+    try {
+        const { dmId } = req.params
+
+        const dm = await DM.findById(dmId)
+        if (!dm) {
+            return await res.status(404).json({
+                success: false,
+                message: 'DM bulunamadı',
+            })
+        }
+
+        const messages = await Message.find({ dmId: dmId }).sort({ timestamp: 1 })
+
+        return res.json({
+            success: true,
+            messages: messages,
+        });
+    } catch (err) {
+        console.log('Hata: ', err.message);
+        return await res.status(500).json({
+            success: false,
+            message: 'Bir hata oluştu',
+        })
+    }
+}
+
 module.exports = {
-    userDmCreate
+    userDmCreate,
+    getDmMessages
 }
