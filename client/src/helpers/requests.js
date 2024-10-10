@@ -1,7 +1,7 @@
 import axios from "axios"
 const api = "http://localhost:80"
 
-async function messageCreate({buyerUserId, senderUserId, dmId, content}){
+async function messageCreate({ buyerUserId, senderUserId, dmId, content }){
     const response = await axios.post(api+"/message/create", {buyerUserId, senderUserId, dmId, content}).then((res)=> {
         return {data: res.data}
     }).catch((err)=> {
@@ -10,7 +10,7 @@ async function messageCreate({buyerUserId, senderUserId, dmId, content}){
     return response
 }
 
-async function dmCreate({users}){
+async function dmCreate({ users }){
     const response = await axios.post(api+"/dm/create", {users: users}).then((res)=> {
         return {data: res.data}
     }).catch((err)=> {
@@ -19,7 +19,7 @@ async function dmCreate({users}){
     return response
 }
 
-async function register({displayName, username, email, password }) {
+async function register({ displayName, username, email, password }) {
     const response = await axios.post(api+"/auth/create", { displayName, username, email, password }).then((res)=> {
         return {data: res.data}
     }).catch((err)=> {

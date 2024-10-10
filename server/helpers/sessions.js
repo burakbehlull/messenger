@@ -25,8 +25,7 @@ function generateAccessToken(data){
 function isExpired(token){
     try {
         const isVerify = jwt.verify(token, JWT_KEY)
-        console.log(isVerify)
-        return {expired: false}
+        return {expired: false, verify: isVerify}
     } catch (err) {
         if (err.name === 'TokenExpiredError') {
             return {expired: true}
