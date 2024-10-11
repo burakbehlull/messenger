@@ -46,6 +46,16 @@ async function login({ email, password }) {
     return response
 }
 
+async function verify(token) {
+    const response = await axios.post(api+"/auth/verify", { token }).then((res)=> {
+        return {data: res.data}
+    }).catch((err)=> {
+        return {error: err}
+    })
+    return response
+}
+
+
 export {
     messageCreate,
     dmCreate,
@@ -53,5 +63,6 @@ export {
 
     // auth
     register,
-    login
+    login,
+    verify
 }

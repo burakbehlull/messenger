@@ -1,6 +1,12 @@
 const express = require('express')
+const http = require('http')
 const cors = require('cors')
 const morgan = require('morgan')
+
+const app = express()
+const server = http.createServer(app)
+const { Server } = require("socket.io")
+const io = new Server(server)
 
 require('dotenv').config()
 require('./config/db').db()
@@ -8,7 +14,6 @@ require('./config/db').db()
 const { dmRoute, messageRoute, authRoute } = require('./routers')
 
 
-const app = express()
 const PORT = process.env.PORT || 80
 
 app.use(express.urlencoded({extended:true}))
@@ -21,14 +26,25 @@ app.use(cors({
 
 app.use(morgan('dev'))
 
-app.get('/', (req,res)=> {
-    res.send('Hello Messenger!')
+io.on('connection', (socket) => {
+	console.log('bağlandı', socket.id)
 })
+app.get('/', (req,res)=> {
+    res.send(`Hello Messenger!
+		<script src="/socket.io/socket.io.js"></script>
+		<script>
+			const socket = io()
+			socket.on('connection', (msg) => {
+				console.log(2)
+				})
 
+		</script>
+		`)
+})
 app.use('/auth', authRoute)
 app.use('/dm', dmRoute)
 app.use('/message', messageRoute)
 
-app.listen(PORT, ()=> {
+server.listen(PORT, ()=> {
 	console.log(`Api, ${PORT} portunda başlatıldı.`)
 })
