@@ -28,18 +28,13 @@ app.use(morgan('dev'))
 
 io.on('connection', (socket) => {
 	console.log('bağlandı', socket.id)
+	socket.on('test', (data)=> {
+		console.log("data geldi: ", data)
+	})
 })
-app.get('/', (req,res)=> {
-    res.send(`Hello Messenger!
-		<script src="/socket.io/socket.io.js"></script>
-		<script>
-			const socket = io()
-			socket.on('connection', (msg) => {
-				console.log(2)
-				})
 
-		</script>
-		`)
+app.get('/', (req,res)=> {
+    res.send(`Hello Messenger!`)
 })
 app.use('/auth', authRoute)
 app.use('/dm', dmRoute)

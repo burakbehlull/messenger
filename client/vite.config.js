@@ -18,6 +18,7 @@ export default defineConfig({
       '@pages': way('src/pages/index'),
       '@requests': way('src/helpers/requests'),
       '@helpers': way('src/helpers/index'),
+      '@services': way('src/services/index'),
     }
   }
 })
