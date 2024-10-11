@@ -1,7 +1,9 @@
-function Message(){
+function Message({data}){
     return (
         <>
-            Message
+            <li>
+                {data.content}
+            </li>
         </>
     )
 }

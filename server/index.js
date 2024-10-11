@@ -30,6 +30,7 @@ io.on('connection', (socket) => {
 	console.log('bağlandı', socket.id)
 	socket.on('test', (data)=> {
 		console.log("data geldi: ", data)
+		io.emit('user', "bur bir deneme")
 	})
 })
 
