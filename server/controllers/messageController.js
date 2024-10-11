@@ -3,12 +3,23 @@ const { generateRandomNumber } = require('../helpers/misc')
 
 async function messageCreate(req, res){
     try {
-        const { buyerUserId, senderUserId, content, dmId } = req.body
+        const { buyerUser, senderUser, content, dmId } = req.body
+		
         const generatedId = await generateRandomNumber()
-        if(!buyerUserId || !senderUserId || !dmId) return
+		
+        if(!buyerUser || !senderUser || !dmId || !content) return
+		
         const message = await Message.create({
-            buyerUserId: buyerUserId,
-            senderUserId: senderUserId,
+			buyerUser: {
+				id: buyerUser,
+				username: buyerUser.username,
+				displayName: buyerUser.displayName
+			},
+			senderUser: {
+				id: senderUser.id,
+				username: senderUser.username,
+				displayName: senderUser.displayName
+			},
             dmId: dmId,
             content: content,
             id: generatedId

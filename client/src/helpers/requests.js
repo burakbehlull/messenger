@@ -1,8 +1,8 @@
 import axios from "axios"
 const api = "http://localhost:80"
 
-async function messageCreate({ buyerUserId, senderUserId, dmId, content }){
-    const response = await axios.post(api+"/message/create", {buyerUserId, senderUserId, dmId, content}).then((res)=> {
+async function messageCreate(buyerUser, senderUser, { dmId, content }){
+    const response = await axios.post(api+"/message/create", {buyerUser, senderUser, dmId, content}).then((res)=> {
         return {data: res.data}
     }).catch((err)=> {
         return {error: err}
