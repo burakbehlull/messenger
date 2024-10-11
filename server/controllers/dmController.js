@@ -2,6 +2,9 @@ const DM = require('../models/DM')
 const Member = require('../models/Member')
 const Message = require('../models/Message')
 const { generateRandomNumber } = require('../helpers/misc')
+const { ShowDm } = require('../helpers/dm')
+
+
 
 async function userDmCreate(req, res) {
     try {
@@ -40,6 +43,7 @@ async function userDmCreate(req, res) {
             type: "directMessage",
             users: users,
             id: randomId,
+            invisible: users
         })
 
         return res.json({
@@ -83,7 +87,59 @@ async function getDmMessages(req, res) {
     }
 }
 
+async function getDms(req, res) {
+    try {
+        const { userId } = req.params
+
+        const dms = await DM.find({ invisible: userId }).exec()
+        if (!dms) {
+            return await res.status(404).json({
+                success: false,
+                message: 'DMler bulunamadı',
+            })
+        }
+        return res.json({
+            success: true,
+            dms: dms,
+        })
+    } catch (err) {
+        console.log('Hata: ', err.message);
+        return await res.status(500).json({
+            success: false,
+            message: 'Bir hata oluştu',
+        })
+    }
+}
+
+async function showDm(req, res) {
+    try {
+        const { dmId, userId, isShow } = req.body
+
+        const result = await ShowDm(dmId, userId, isShow)
+        if (result.error) {
+            return await res.status(404).json({
+                success: false,
+                message: 'DM bulunamadı',
+            })
+        }
+        return res.json({
+            success: true,
+            data: result.data,
+        })
+    } catch (err) {
+        console.log('Hata: ', err.message);
+        return await res.status(500).json({
+            success: false,
+            message: 'Bir hata oluştu',
+        })
+    }
+}
+
+
+
 module.exports = {
     userDmCreate,
-    getDmMessages
+    getDmMessages,
+    getDms,
+    showDm
 }

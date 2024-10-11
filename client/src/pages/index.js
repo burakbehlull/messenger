@@ -15,21 +15,31 @@ import Register from "./auth/Register"
 import Nav from "./partials/Nav"
 import Footer from "./partials/Footer"
 
+// user
+import Interface from "./user/Interface"
+import Profile from "./user/Profile"
 
 export {
     // pages
     Home,
-    // native
-    Dm,
-    Message,
-    Messages,
+	
     // auth
     IsLogin,
     Login,
     Register,
-
-    // partials
+	
+	// user
+	Interface,
+	Profile,
+	
+	
+	// native
+    Dm,
+    Message,
+    Messages,
+	
+	// partials
     Nav,
-    Footer
+    Footer,
 
 }

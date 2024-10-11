@@ -16,9 +16,10 @@ const DMSchema = new Schema({
         ref: 'Member', 
         required: true 
     }],
-    invisible: { 
-        type: Array,
-    },
+    invisible: [{ 
+        type: Schema.Types.ObjectId, 
+        ref: 'Member'
+    }],
     id: {
         type: String
     },
