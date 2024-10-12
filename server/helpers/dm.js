@@ -108,13 +108,15 @@ async function GetDmMessages(dmId){
 async function GetDms(userId){
     try {
         const dms = await DM.find({ invisible: userId }).exec()
-        if (!dm) return {
+        if (!dms) return {
             success: false,
             message: 'DM bulunamadı',
+            code: 404
         }
         return {
             success: true,
             dms: dms,
+            code: 200
         }
     } catch(err){
         return {
