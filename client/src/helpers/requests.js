@@ -28,6 +28,26 @@ async function getDmMessages(dmId){
     return response
 }
 
+async function getDms(userId){
+    const response = await axios.get(api+`/dm/find/${userId}`)
+    .then((res)=> {
+        return {data: res.data}
+    }).catch((err)=> {
+        return {error: err}
+    })
+    return response
+}
+
+async function dmShow({ dmId, userId, isShow }){
+    const response = await axios.post(api+"/dm/show", {dmId, userId, isShow})
+    .then((res)=> {
+        return {data: res.data}
+    }).catch((err)=> {
+        return {error: err}
+    })
+    return response
+}
+
 async function register({ displayName, username, email, password }) {
     const response = await axios.post(api+"/auth/create", { displayName, username, email, password }).then((res)=> {
         return {data: res.data}
@@ -58,8 +78,12 @@ async function verify(token) {
 
 export {
     messageCreate,
-    dmCreate,
+
     getDmMessages,
+    
+    dmCreate,
+    getDms,
+    dmShow,
 
     // auth
     register,
