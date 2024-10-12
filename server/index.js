@@ -32,6 +32,12 @@ io.on('connection', (socket) => {
 		console.log("data geldi: ", data)
 		io.emit('user', "bur bir deneme")
 	})
+	socket.on("UserConnected", (socket)=> {
+
+	})
+	socket.on("disconnect", (socket)=> {
+		console.log("Kullanıcı çıktı. ", socket.id)
+	})
 })
 
 app.get('/', (req,res)=> {
