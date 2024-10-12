@@ -1,6 +1,8 @@
 const Member = require('../models/Member')
 const { generateRandomNumber } = require('../helpers/misc')
+const { isOnline } = require('../helpers/user')
 const { generateRefreshToken, verifyAccessToken, verifyToken } = require('../helpers/sessions')
+
 
 async function register(req,res){
 
@@ -10,7 +12,6 @@ async function register(req,res){
 	
     const generatedId = await generateRandomNumber()
 	const generatedToken = await generateRefreshToken({ email: email, id: generatedId, username: username })
-    console.log(generatedToken)
     if(!user){
 		await Member.create({
             displayName: displayName,
@@ -36,7 +37,6 @@ async function login(req,res){
     const { email, password } = req.body
     try {
         const user = await Member.findOne({email: email})
-        console.log('user,', user)
         if(!user) {
             return res.json({
                 success: false,
@@ -82,9 +82,7 @@ async function userVerify(req,res){
                 message: 'Token boş'
             })
         }
-        console.log(verify)
         const user = await Member.findOne({email: verify?.user?.email}).select('-password -token')
-        console.log(user)
         return res.json({
             success: true,
             message: 'İşlem başarılı',
@@ -92,7 +90,7 @@ async function userVerify(req,res){
             user: user
         })
     } catch (err) {
-        console.log(err)
+        console.log("Hata: ", err)
         return res.json({
             success: false,
             message: 'İşlem başarısız',
@@ -101,8 +99,23 @@ async function userVerify(req,res){
     }
 }
 
+async function userIsOnline(req, res) {
+    try { 
+        const { userId, isOnline } = req.body
+        const online = await isOnline(userId, isOnline)
+        return await res.status(online.code).json(online)
+    } catch(err){
+        return await res.status().json({
+            error: err.message
+        })
+    }
+}
+
+
+
 module.exports = {
 	register,
     login,
-    userVerify
+    userVerify,
+    userIsOnline
 }

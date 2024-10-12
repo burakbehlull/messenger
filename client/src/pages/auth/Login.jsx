@@ -14,7 +14,7 @@ function Login(){
     const [data, setData] = useState({})
 
     const navigate = useNavigate()
-    const { setToken } = useAuthToken()
+    const { setToken, removeToken } = useAuthToken()
 
     function handleChange(e){
         setValues({...values, [e.target.name]: e.target.value})
@@ -29,10 +29,10 @@ function Login(){
             
             setData(submit.data)
             const token = submit.data['accessToken']
+            removeToken()
             setToken(token)
             navigate('/interface')
         }
-        console.log(data)
     }
     return (
         <>

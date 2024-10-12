@@ -39,6 +39,11 @@ const MemberSchema = new Schema({
     lastLoggedIn: {
         type: Date,
         default: Date.now
+    },
+    // other features
+    isOnline: {
+        type: Boolean,
+        default: false,
     }
 })
 

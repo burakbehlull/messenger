@@ -7,6 +7,7 @@ import { Socket } from '@services'
 function Interface() {
     const [error, setError] = useState({})
     const [data, setData] = useState({})
+    const [user, setUser] = useState({})
 
     const { getToken } = useAuthToken()
     const token = getToken()
@@ -18,24 +19,26 @@ function Interface() {
         if(submit.data) {
             console.log("verify data", submit.data)
             setData(submit.data)
+            setUser(submit.data.user)
         }
         if(submit.error) setError(submit.error)
     }
 
-    useEffect(()=>{
-        io.sign('user', (data)=>{
-            console.log('CLIENT DATA', data)
-        })
-    })
-
     useEffect(()=> {
-        io.send('test', 'bu bir datadır')
         handleSubmit()
     }, [])
-    
+    // useEffect(()=> {
+        
+    //     return () => {
+    //         io.socket.disconnect()
+    //     }
+    // }, [user])
+
+
     return (
         <>
             Interface
+            {JSON.stringify(data.user)}
         </>
     )
 }

@@ -13,6 +13,7 @@ require('./config/db').db()
 
 const { dmRoute, messageRoute, authRoute } = require('./routers')
 
+const { isOnline } = require('./helpers/user')
 
 const PORT = process.env.PORT || 80
 
@@ -20,23 +21,19 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 
 app.use(cors({
-	origin: true,
-	credentials: true
+	origin: '*', 
+    methods: ['GET', 'POST'],
+    credentials: true
 }))
 
 app.use(morgan('dev'))
 
 io.on('connection', (socket) => {
 	console.log('bağlandı', socket.id)
-	socket.on('test', (data)=> {
-		console.log("data geldi: ", data)
-		io.emit('user', "bur bir deneme")
-	})
-	socket.on("UserConnected", (socket)=> {
-
-	})
-	socket.on("disconnect", (socket)=> {
-		console.log("Kullanıcı çıktı. ", socket.id)
+	
+	socket.on("disconnect", (user)=> {
+		
+		console.log('serverdan ayrıldı', user.id)
 	})
 })
 

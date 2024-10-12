@@ -76,6 +76,16 @@ async function verify(token) {
     return response
 }
 
+async function isOnline(userId, isOnline) {
+    const response = await axios.post(api+"/auth/status", { userId, isOnline }).then((res)=> {
+        return {data: res.data}
+    }).catch((err)=> {
+        return {error: err}
+    })
+    return response
+}
+
+
 
 export {
     messageCreate,
@@ -89,5 +99,8 @@ export {
     // auth
     register,
     login,
-    verify
+    verify,
+
+    // user features
+    isOnline
 }
