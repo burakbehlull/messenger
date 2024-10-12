@@ -1,28 +1,38 @@
 import { useState } from "react"
-import { login } from '@requests'
-import { setSession, removeSession } from '@helpers'
 import { useNavigate } from 'react-router-dom'
+
+import { login } from '@requests'
+import { useAuthToken } from '@helpers'
 
 function Login(){
     const [values, setValues] = useState({
         email: "", 
         password: ""
     })
+
     const [error, setError] = useState({})
     const [data, setData] = useState({})
+
     const navigate = useNavigate()
+    const { setToken } = useAuthToken()
+
     function handleChange(e){
         setValues({...values, [e.target.name]: e.target.value})
     }
+
     async function handleSubmit(){
         const submit = await login(values)
-        if(submit.data) {
-            setData(submit.data)
-            removeSession()
-            setSession(submit.data['accessToken'])
-            navigate('/')
-        }
         if(submit.error) setError(submit.error)
+        if(!submit.data.success) setError({error: submit.data.message})
+        
+        if(submit.data) {
+            
+            setData(submit.data)
+            const token = submit.data['accessToken']
+            setToken(token)
+            navigate('/interface')
+        }
+        console.log(data)
     }
     return (
         <>

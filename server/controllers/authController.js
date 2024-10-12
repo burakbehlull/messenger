@@ -36,8 +36,9 @@ async function login(req,res){
     const { email, password } = req.body
     try {
         const user = await Member.findOne({email: email})
-        if(user == undefined || user == null) {
-            res.json({
+        console.log('user,', user)
+        if(!user) {
+            return res.json({
                 success: false,
                 message: 'Kullanıcı mevcut değil',
             })
@@ -45,13 +46,13 @@ async function login(req,res){
         if(user.password == password){
             const isToken = await verifyAccessToken(user)
             
-            res.json({
+            return res.json({
                 success: true,
                 username: user.username,
                 accessToken: isToken, 
             })
         } else {
-            res.json({
+            return res.json({
                 success: false,
                 message: "Şifre yanlış"
             })
@@ -82,7 +83,7 @@ async function userVerify(req,res){
             })
         }
         console.log(verify)
-        const user = await Member.findOne({email: verify?.user?.email}).select('-password')
+        const user = await Member.findOne({email: verify?.user?.email}).select('-password -token')
         console.log(user)
         return res.json({
             success: true,

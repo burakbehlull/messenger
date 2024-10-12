@@ -61,6 +61,7 @@ async function login({ email, password }) {
     const response = await axios.post(api+"/auth/find", { email, password }).then((res)=> {
         return {data: res.data}
     }).catch((err)=> {
+        console.error('Hata: ', err.message)
         return {error: err}
     })
     return response
