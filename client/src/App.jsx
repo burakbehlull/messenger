@@ -1,6 +1,8 @@
 import { BrowserRouter } from "react-router-dom"
 import Routes from "./routers/routes"
 import { Socket as IO } from './services/Socket'
+import './main.scss'
+
 function App() {
   const Socket = new IO()
   return (

@@ -36,10 +36,14 @@ function Interface() {
 
 
     return (
-        <>
-            Interface
-            {JSON.stringify(data.user)}
-        </>
+        <div className="interface">
+            <div className="left">
+                LEFT
+            </div>
+            <div className="right">
+                RIGHT
+            </div>
+        </div>
     )
 }
 
