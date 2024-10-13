@@ -3,6 +3,7 @@ import Home from "./Home"
 
 // native
 import Dm from "./native/Dm"
+import DmList from "./native/DmList"
 import Message from "./native/Message"
 import Messages from "./native/Messages"
 
@@ -35,6 +36,7 @@ export {
 	
 	// native
     Dm,
+    DmList,
     Message,
     Messages,
 	

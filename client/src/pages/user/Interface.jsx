@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { verify } from '@requests'
 import { useAuthToken } from '@helpers'
 import { Socket } from '@services'
+import { DmList } from '@pages'
 
 
 function Interface() {
@@ -27,21 +28,27 @@ function Interface() {
     useEffect(()=> {
         handleSubmit()
     }, [])
-    // useEffect(()=> {
-        
-    //     return () => {
-    //         io.socket.disconnect()
-    //     }
-    // }, [user])
+
+//     useEffect(()=> {
+		
+// 	io.sign("connect", ()=> {
+// 		console.log(2)
+// 	})
+//      return () => {
+//              io.socket.disconnect()
+//          }
+//      }, [user])
+	 
+// })
 
 
     return (
         <div className="interface">
             <div className="left">
-                LEFT
+                <DmList userId="6707ebbaddbab95fd0e3b761" />
             </div>
             <div className="right">
-                RIGHT
+                
             </div>
         </div>
     )

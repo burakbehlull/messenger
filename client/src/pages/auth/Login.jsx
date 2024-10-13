@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 
 import { login } from '@requests'
 import { useAuthToken } from '@helpers'
@@ -23,10 +24,9 @@ function Login(){
     async function handleSubmit(){
         const submit = await login(values)
         if(submit.error) setError(submit.error)
-        if(!submit.data.success) setError({error: submit.data.message})
+        if(!submit.data.success || error) setError({error: submit.data.message})
         
         if(submit.data) {
-            
             setData(submit.data)
             const token = submit.data['accessToken']
             removeToken()
@@ -36,6 +36,9 @@ function Login(){
     }
     return (
         <>
+            <Helmet>
+                <title>Messenger | Giriş sayfası</title>
+            </Helmet>
             Login
             {JSON.stringify(values)}
             {JSON.stringify(data)}

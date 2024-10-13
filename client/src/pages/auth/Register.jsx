@@ -1,6 +1,9 @@
 import { useState } from "react"
-import { register } from '@requests'
 import { useNavigate } from "react-router-dom"
+import { Helmet } from 'react-helmet'
+
+
+import { register } from '@requests'
 
 function Register(){
     const [values, setValues] = useState({
@@ -27,6 +30,9 @@ function Register(){
     return (
         <>
             REGİSTER
+            <Helmet>
+                <title>Messenger | Kayıt sayfası</title>
+            </Helmet>
             {JSON.stringify(values)}
             {JSON.stringify(data)}
             {JSON.stringify(error)}
