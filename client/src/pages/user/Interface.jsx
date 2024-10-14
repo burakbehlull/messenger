@@ -45,7 +45,7 @@ function Interface() {
     return (
         <div className="interface">
             <div className="left">
-                <DmList userId="6707ebbaddbab95fd0e3b761" />
+                <DmList userId="670801e53f60fb402cb23791" />
             </div>
             <div className="right">
                 

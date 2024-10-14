@@ -5,10 +5,12 @@ function Dmlist({userId}){
     
     const [error, setError] = useState(null)
     const [data, setData] = useState(null)
+    const [dms, setDms] = useState(null)
     const handleSubmit = async () => {
         const submit = await getDms(userId)
         if(submit.data) {
             setData(submit.data)
+            setDms(submit.data['dms'])
         }
         if(submit.error) setError(submit.error)
         if(!submit.data.success || error) setError({error: submit.data.message})
@@ -24,7 +26,11 @@ function Dmlist({userId}){
     return (
         <>
             DM LIST
-            {JSON.stringify(data)}
+            <ul>
+                {dms?.map((dm, i)=> {
+                    return <li key={i}> {dm.dmName} </li>
+                })}
+            </ul>
         </>
     )
 }

@@ -105,23 +105,25 @@ async function GetDmMessages(dmId){
     }
 }
 
+
 async function GetDms(userId) {
     try {
-        const dms = await DM.find({ invisible: { $ne: userId } })
-            .populate('users', 'displayName') 
+        const dms = await DM.find({ invisible: userId}) 
+            .populate('users', 'displayName')
             .exec()
-
+        console.log("dms", dms)
         if (!dms || dms.length === 0) {
             return {
                 success: false,
                 message: 'DM bulunamadı',
                 code: 404
-            };
+            }
         }
 
         const processedDms = dms.map(dm => {
             const otherUser = dm.users.find(user => user._id.toString() !== userId.toString())
-            const dmName = otherUser ? otherUser.displayName : 'Unknown User';
+
+            const dmName = otherUser ? otherUser.displayName : 'Unknown User'
 
             return {
                 ...dm.toObject(),
@@ -143,6 +145,7 @@ async function GetDms(userId) {
         }
     }
 }
+
 
 module.exports = {
     ShowDm,
