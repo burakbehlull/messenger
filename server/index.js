@@ -13,7 +13,6 @@ require('./config/db').db()
 
 const { dmRoute, messageRoute, authRoute } = require('./routers')
 
-const { isOnline } = require('./helpers/user')
 
 const PORT = process.env.PORT || 80
 
@@ -37,7 +36,7 @@ io.on('connection', (socket) => {
 	})
 })
 
-app.get('/', (req,res)=> {
+app.get('/', async (req,res)=> {
     res.send(`Hello Messenger!`)
 })
 app.use('/auth', authRoute)
