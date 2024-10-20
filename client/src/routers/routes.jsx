@@ -16,12 +16,18 @@ const Routes = ()=> {
             element: <Login />
         },
         {
-            path: '/dm',
-            element: <Dm />
-        },
-        {
             path: '/interface',
-            element: <Interface />
+            element: <Interface />,
+            children: [
+                {
+                    path: '',
+                    element: <h1>xd</h1>
+                },
+                {
+                    path: 'dm/:id',
+                    element: <Dm />
+                }
+            ]
         }
     ])
     return data

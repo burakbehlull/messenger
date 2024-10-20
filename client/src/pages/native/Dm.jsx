@@ -1,11 +1,16 @@
 import Messages from "./Messages"
+import { useParams, useLocation } from "react-router-dom"
 
 
 function Dm(){
+    
+    const { id } = useParams()
+    const { state } = useLocation()
+    const dm = state.dm
+
     return (
-        <>
-            Dm
-            <Messages dmId="670802aa3f60fb402cb237a0" />
+        <>        
+            <Messages dmId={dm._id} />
         </>
     )
 }

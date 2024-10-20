@@ -3,6 +3,7 @@ import { verify } from '@requests'
 import { useAuthToken } from '@helpers'
 import { Socket } from '@services'
 import { DmList } from '@pages'
+import { Outlet } from 'react-router-dom'
 
 
 function Interface() {
@@ -45,10 +46,11 @@ function Interface() {
     return (
         <div className="interface">
             <div className="left">
-                <DmList userId="670801e53f60fb402cb23791" />
+                <DmList userId={user?._id} />
             </div>
             <div className="right">
                 
+                <Outlet />
             </div>
         </div>
     )
